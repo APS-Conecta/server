@@ -1,97 +1,67 @@
 <!--
  - SPDX-FileCopyrightText: 2016-2024 Nextcloud GmbH and Nextcloud contributors
  - SPDX-FileCopyrightText: 2013-2016 ownCloud, Inc.
+ - SPDX-FileCopyrightText: 2026 APS Conecta contributors
  - SPDX-License-Identifier: AGPL-3.0-or-later
 -->
-# Nextcloud Server ☁
-[![REUSE status](https://api.reuse.software/badge/github.com/nextcloud/server)](https://api.reuse.software/info/github.com/nextcloud/server)
-[![codecov](https://codecov.io/gh/nextcloud/server/branch/stable34/graph/badge.svg)](https://codecov.io/gh/nextcloud/server)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/209/badge)](https://bestpractices.coreinfrastructure.org/projects/209)
-[![Design](https://contribute.design/api/shield/nextcloud/server)](https://contribute.design/nextcloud/server)
+# APS Conecta Gestión — Servidor
 
-**A safe home for all your data.**
+**Un fork-mod de Nextcloud 34, a la medida de la Atención Primaria de Salud.**
 
-![](https://raw.githubusercontent.com/nextcloud/screenshots/stable34/nextcloud-hub-25-files.png)
+Este repositorio es el servidor de **APS Conecta Gestión**, la suite de gestión interna para la red de **Atención Primaria de Salud (APS)**. No es una copia sin cambios: es una **bifurcación modificada** — un *fork-mod* de **Nextcloud Server 34** — en la que el motor es upstream y lo propio son las **apps** y la **piel**.
 
-## Why is this so awesome? 🤩
+> En una frase: **Nextcloud 34, trasplantado al primer nivel de atención.**
 
-* 📁 **Access your Data** You can store your files, contacts, calendars, and more on a server of your choosing.
-* 🔄 **Sync your Data** You keep your files, contacts, calendars, and more synchronized amongst your devices.
-* 🙌 **Share your Data** …by giving others access to the stuff you want them to see or to collaborate with.
-* 🚀 **Expandable with hundreds of Apps** ...like [Calendar](https://github.com/nextcloud/calendar), [Contacts](https://github.com/nextcloud/contacts), [Mail](https://github.com/nextcloud/mail), [Video Chat](https://github.com/nextcloud/spreed) and all those you can discover in our [App Store](https://apps.nextcloud.com)
-* 🔒 **Security** with our encryption mechanisms, [HackerOne bounty program](https://hackerone.com/nextcloud) and two-factor authentication.
+## Qué es el fork-mod, capa por capa
 
-Do you want to learn more about how you can use Nextcloud to access, share, and protect your files, calendars, contacts, communication & more at home and in your organization? [**Learn about all our Features**](https://nextcloud.com/athome/).
+| Capa | Qué es | Dónde vive |
+|---|---|---|
+| **El motor** | Nextcloud Server 34 — la línea que despliega Gestión (imagen `nextcloud:34-apache`, fijada por digest) | este repositorio |
+| **Las apps propias** | Software escrito para el trabajo diario de un establecimiento de APS | un repositorio por app en la organización |
+| **La piel** | Tema CSS personalizado `apsconecta` | [`gestion/themes/apsconecta`](https://github.com/APS-Conecta/gestion/tree/main/themes/apsconecta) |
 
-## Get your Nextcloud 🚚
+## Las apps propias
 
-- ☑️ [**Simply sign up**](https://nextcloud.com/signup/) at one of our providers either through our website or through the apps directly.
-- 🖥 [**Install** a server by yourself](https://nextcloud.com/install/#instructions-server) on your hardware or by using one of our ready-to-use **appliances**
-- 📦 Buy one of the [awesome **devices** coming with a preinstalled Nextcloud](https://nextcloud.com/devices/)
-- 🏢 Find a [service **provider**](https://nextcloud.com/providers/) who hosts Nextcloud for you or your company
+- **[epidemiologia](https://github.com/APS-Conecta/epidemiologia)** — vigilancia epidemiológica a la vista del equipo: alertas del MINSAL, informes IRAG y tablero de seguimiento.
+- **[territorio](https://github.com/APS-Conecta/territorio)** — el mapa de la comunidad: mapeo territorial y asignación de sectores, sobre un basemap propio de OpenStreetMap (todo Chile, zoom 0–15, autohospedado).
+- **[farmacia](https://github.com/APS-Conecta/farmacia)** — el arsenal farmacológico del establecimiento como vademécum, con importación CSV por etapas.
 
-Enterprise? Public Sector or Education user? You may want to have a look into [**Nextcloud Enterprise**](https://nextcloud.com/enterprise/) provided by Nextcloud GmbH.
+A ellas se suman, ya integradas a la suite, apps de terceros **parcheadas y fijadas por sha256** (Calendar, Contacts, `side_menu`, `groupfolders`, Euro-Office, Talk): una instalación limpia **no contacta la tienda de apps**.
 
-## Get in touch 💬
+## La piel: tema CSS `apsconecta`
 
-* [📋 Forum](https://help.nextcloud.com)
-* [🦋 Bluesky](https://bsky.app/profile/nextcloud.bsky.social)
-* [👥 Facebook](https://www.facebook.com/nextclouders)
-* [🐘 Mastodon](https://mastodon.xyz/@nextcloud)
+El tema no es un color de acento: es identidad. **Tipografías autohospedadas** (Fraunces + Nunito Sans, sin CDN ni Google Fonts), paleta propia — violeta primario, oro de acento — con su libro de contraste documentado (**AA**), y cobertura hasta la ruta de render *legacy*: mantenimiento, instalación y páginas de error también llevan la marca.
 
-You can also [get support for Nextcloud](https://nextcloud.com/support)!
+## Por qué un fork
 
+- **Pertinencia.** La APS necesita apps que no existen en ninguna tienda — epidemiología, territorio, vademécum — y una identidad visual propia, no prestada.
+- **Determinismo.** Cada byte que un establecimiento ejecuta es verificable: imágenes por digest, apps por sha256, nada se descarga en el camino.
+- **Permanencia.** La AGPL permite modificar y obliga a compartir. Lo hacemos con gusto.
 
-## Join the team 👪
+## Para quién — y para quién no
 
-There are many ways to contribute, of which development is only one! Find out [how to get involved](https://nextcloud.com/contribute/), including as a translator, designer, tester, helping others, and much more! 😍
+Para el **sector de la Atención Primaria de Salud**: el equipo de un CESFAM, PSR, CECOSF, COSAM, SAPU o cualquiera de la red. Cada instalación sirve a **un establecimiento**, nombrado en su propia configuración — el producto no nomina ninguno.
 
+Y el límite, escrito en el frente: **Gestión es operación interna** — documentos, coordinación, chat y oficina. **No es ficha clínica: sin datos de pacientes**, y el desarrollo trabaja solo con datos sintéticos.
 
-### Development setup 👩‍💻
+## El ecosistema
 
-1. 🚀 [Set up your local development environment](https://docs.nextcloud.com/server/latest/developer_manual/getting_started/devenv.html)
-2. 🐛 [Pick a good first issue](https://github.com/nextcloud/server/labels/good%20first%20issue)
-3. 👩‍🔧 Create a branch and make your changes. Remember to sign off your commits using `git commit -sm "Your commit message"`
-4. ⬆ Create a [pull request](https://opensource.guide/how-to-contribute/#opening-a-pull-request) and `@mention` the people from the issue to review
-5. 👍 Fix things that come up during a review
-6. 🎉 Wait for it to get merged!
+| Repositorio | Rol |
+|---|---|
+| **server** (este) | la base: fork-mod de Nextcloud 34 |
+| [gestion](https://github.com/APS-Conecta/gestion) | la suite que despliega: Docker Compose + PostgreSQL 18 + Redis 8 + Euro-Office + Talk, config-as-code |
+| [epidemiologia](https://github.com/APS-Conecta/epidemiologia) · [territorio](https://github.com/APS-Conecta/territorio) · [farmacia](https://github.com/APS-Conecta/farmacia) | las apps propias |
+| [calculadora-ecicep](https://github.com/APS-Conecta/calculadora-ecicep) | motor clínico del calculador de riesgo ECICEP: 52 condiciones crónicas, pesos y códigos CIE-10 |
+| [aps-conecta-web](https://github.com/APS-Conecta/aps-conecta-web) | el sitio público de APS Conecta |
 
-Third-party components are handled as git submodules which have to be initialized first. So aside from the regular git checkout invoking `git submodule update --init` or a similar command is needed, for details see Git documentation.
+## Cómo se despliega
 
-Several apps that are included by default in regular releases such as [First run wizard](https://github.com/nextcloud/firstrunwizard) or [Activity](https://github.com/nextcloud/activity) are missing in `stable34` and have to be installed manually by cloning them into the `apps` subfolder.
+No se despliega desde aquí. Un establecimiento instala un **release** de [gestion](https://github.com/APS-Conecta/gestion) — `git clone --branch vX.Y.Z --depth 1` — y un solo comando (`make install`) levanta la pila, aprovisiona y se autoverifica. `main` es el tronco de desarrollo y no es lo que va a producción.
 
-Otherwise, git checkouts can be handled the same as release archives, by using the `stable*` branches. Note they should never be used on production systems.
+## Procedencia y licencia
 
+Este repositorio es una bifurcación de trabajo de [`nextcloud/server`](https://github.com/nextcloud/server); la suite parte de su línea 34. El upstream es el autor del motor: nuestro agradecimiento a **Nextcloud GmbH** y su comunidad — y, un escalón atrás en la historia, a **ownCloud, Inc.** Todo el árbol se distribuye bajo **AGPL-3.0-or-later**: motor, apps y tema. Cada archivo conserva sus encabezados SPDX con la autoría original; lo que cambia respecto del upstream se lee en la historia de `git` de este repositorio.
 
-### Tools we use 🛠
+## Soporte y contribución
 
-- [👀 BrowserStack](https://browserstack.com) for cross-browser testing
-- [🌊 WAVE](https://wave.webaim.org/extension/) for accessibility testing
-- [🚨 Lighthouse](https://developers.google.com/web/tools/lighthouse/) for testing performance, accessibility, and more
-
-#### Helpful bots at GitHub :robot:
-
-- Comment on a pull request with `/update-3rdparty` to update the 3rd party submodule. It will update to the last commit of the 3rd party branch named like the PR target.
-
-#### Ignore code style updates in git blame
-
-`git config blame.ignoreRevsFile .git-blame-ignore-revs`
-
-## Contribution guidelines 📜
-
-All contributions to this repository from June 16, 2016, and onward are considered to be
-licensed under the AGPLv3 or any later version.
-
-Nextcloud doesn't require a CLA (Contributor License Agreement).
-The copyright belongs to all the individual contributors. 
-Therefore we recommend that every contributor adds the following line to the [AUTHORS](AUTHORS) file if they made substantial changes to the code:
-
-```
-- <your name> <your email address>
-```
-
-Please read the [Code of Conduct](https://nextcloud.com/community/code-of-conduct/). This document offers some guidance to ensure Nextcloud participants can cooperate effectively in a positive and inspiring atmosphere and to explain how together we can strengthen and support each other.
-
-Please review the [guidelines for contributing](.github/CONTRIBUTING.md) to this repository.
-
-More information on how to contribute: [https://nextcloud.com/contribute/](https://nextcloud.com/contribute/)
+El soporte de este fork es el de la organización **APS Conecta**, no el de Nextcloud GmbH. Para el motor upstream: [foro](https://help.nextcloud.com) y [documentación](https://docs.nextcloud.com/server). Para el desarrollo propio: empieza por [gestion](https://github.com/APS-Conecta/gestion) y su `CONTRIBUTING.md`.
